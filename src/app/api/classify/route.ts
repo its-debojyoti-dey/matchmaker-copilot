@@ -3,11 +3,17 @@ import { analyzeRejectionFeedback } from "@/lib/rejectionClassifier";
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { feedbackText, apiKey, provider } = body;
+    let body;
+    try {
+      body = await req.json();
+    } catch (parseErr) {
+      return NextResponse.json({ error: "Invalid JSON in request body", details: String(parseErr) }, { status: 400 });
+    }
+
+    const { feedbackText, apiKey, provider } = body || {};
 
     if (!feedbackText || typeof feedbackText !== "string") {
-      return NextResponse.json({ error: "Missing feedbackText" }, { status: 400 });
+      return NextResponse.json({ error: "Missing or invalid feedbackText" }, { status: 400 });
     }
 
     // If an external API key is provided for Gemini or OpenAI, attempt live call
