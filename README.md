@@ -64,11 +64,13 @@ Toggle between **Assessment Baseline** and **Post-Auditor Projected** to inspect
 ---
 
 ## Tech Stack
-* **Framework:** Next.js 14 App Router
-* **Language:** TypeScript (Strict)
-* **Styling:** Tailwind CSS
-* **Icons:** Lucide React
-* **AI & NLP:** Gemini Flash / Deterministic JSON schemas
+* **Framework:** Next.js 14 (App Router)
+* **Language:** TypeScript 5 (Strict Mode)
+* **Architecture:** Domain-Driven Design (DDD) composable rule pipeline
+* **Styling & UI:** Tailwind CSS, Lucide React
+* **AI & NLP:** Dual-Mode Engine (Zero-latency heuristic NLP + Gemini 3.8 Flash / 3.7 Flash with structured JSON outputs)
+* **Testing:** Node.js native test runner (`node:test`, `node:assert/strict`)
+* **Deployment:** Vercel (Edge & Serverless)
 
 ---
 

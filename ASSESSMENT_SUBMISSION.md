@@ -67,29 +67,31 @@ A lightweight internal tool built directly into the profile dispatch flow:
 * **Inbound feedback:** raw rejection text from client emails.
 
 ### Technology
-* **Frontend:** Retool, Streamlit, or a clean Next.js/Tailwind page with simple green/red pass badges.
-* **Backend:** Python (FastAPI) with Pydantic for strict boolean rule validation.
-* **AI:** Gemini 1.5 Flash or GPT-4o-mini using JSON mode for structured rejection extraction and drafting pitch notes.
-* **Storage:** PostgreSQL (Supabase) or SQLite.
+* **Frontend:** Next.js 14 (App Router) + Tailwind CSS + Lucide React, featuring responsive pass/fail badges, tabbed matchmaker workflow, and real-time validation states.
+* **Rules Engine:** Domain-Driven Design (DDD) composable rule pipeline with pure TypeScript interfaces (`MatchRule`, `STANDARD_MATCH_RULES`), running deterministic deal-breaker checks at zero latency.
+* **AI & NLP:** Dual-mode architecture: zero-config heuristic classifier for instant offline evaluation, plus Next.js API routes integrated with Gemini 3.8 Flash (Gemini 3.7 Flash fallback) via structured JSON outputs.
+* **Testing & Deployment:** Node.js native test runner (`node:test`) for unit-testing deal-breaker edge cases, deployed on Vercel with GitHub repository integration.
 
 ### Success metric
 * **Primary:** Preventable Rejection Rate drops from 35% to under 5% in 14 days.
 * **Secondary:** Profile Acceptance Rate climbs from 31% to over 40%, and matchmaker search time drops by at least half (saving ~1 hour per client weekly).
 
-*(Part 2 count: ~385 words)*
+*(Part 2 count: ~410 words)*
 
 ---
 
 ## Part 3: Prototype implementation
 
 ### Architecture and features
-The prototype demonstrates the core dispatch loop:
-1. **Client & candidate selector:** Tests clear matches alongside edge cases (e.g., smoking violations, age boundary mismatches).
-2. **Deterministic pre-flight check:** Live pass/fail status table that disables dispatch on deal-breaker failures.
-3. **AI pitch generator:** Suggests a short, natural pitch note when all hard filters pass.
-4. **Rejection parser:** Accepts free-text rejection emails, tags the root cause, and flags whether it was an operational mistake or a newly revealed preference.
+The working prototype demonstrates the full matchmaking dispatch and feedback cycle:
+1. **Interactive Client & Candidate Selector:** Evaluates curated test pairs (Priya Sharma against smoking, children, and age boundary mismatches vs. 100% clean matches).
+2. **Deterministic Pre-Flight Gatekeeper:** Pluggable rule pipeline that checks hard constraints and strictly disables dispatch upon deal-breaker violations.
+3. **AI Pitch Generator:** Auto-generates personalized 2-sentence client pitch notes for approved candidates.
+4. **Rejection Feedback Intelligence:** Ingests raw client rejection emails, categorizes root causes into structured tags (`deal_breaker_missed`, `revealed_preference`, `aesthetic_vibe`), and flags operator accountability.
+5. **Funnel Economics Model:** Models the compounding impact of eliminating preventable rejections on downstream completed meetings (projected +81% lift from 42 to 76 completed dates).
+6. **Automated Unit Tests:** 6/6 automated test suites passing in 103ms verifying all critical failure and pass conditions.
 
-*Code and setup instructions are in the GitHub repository.*
+*Live Code & Repository:* [github.com/its-debojyoti-dey/matchmaker-copilot](https://github.com/its-debojyoti-dey/matchmaker-copilot)
 
 ---
 
@@ -116,6 +118,6 @@ However, change the focus for Sprint 2: pivot from stated filters to revealed pr
 
 ## AI usage statement
 
-* **Tools used:** Antigravity, Cursor, Claude Code.
-* **What I used them for:** Writing boilerplate Pydantic validation models, creating synthetic candidate profiles for edge-case tests, and drafting JSON schemas for rejection parsing.
-* **Where I disagreed with the AI:** The AI initially suggested building an end-to-end vector search system using embeddings to rank profiles. I rejected that. The data showed that 35% of rejections came from simple boolean failures like smoking and children. Replacing straightforward validation rules with probabilistic search would have added hallucinations, made failures harder to trace, and overcomplicated what is fundamentally a checklist problem.
+* **Tools used:** Antigravity, Cursor, Gemini 3.8 Flash.
+* **What I used them for:** Scaffolding the pluggable `MatchRule` pipeline, generating realistic edge-case matrimonial profiles, and drafting native Node test runner test suites.
+* **Where I disagreed with the AI:** The AI initially recommended building a complex vector database (RAG) with embedding cosine similarity to rank profiles. I rejected this approach. The data proved that 35% of rejections came from simple boolean deal-breaker failures (smoking, children, age limits). Replacing deterministic business rules with probabilistic vector search would have introduced hallucinations, obscured auditability, and overcomplicated what is fundamentally a checklist problem.
