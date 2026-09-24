@@ -16,9 +16,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing or invalid feedbackText" }, { status: 400 });
     }
 
-    // Live LLM Mode: Uses latest Gemini 2.0 Flash (with 1.5 Flash fallback)
+    // Live LLM Mode: Uses latest Gemini 3.8 Flash (with 3.7 Flash fallback)
     if (apiKey && provider === "gemini") {
-      const models = ["gemini-2.0-flash", "gemini-1.5-flash"];
+      const models = ["gemini-3.8-flash", "gemini-3.7-flash"];
       for (const model of models) {
         try {
           const response = await fetch(

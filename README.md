@@ -16,7 +16,7 @@ This prototype provides an operational copilot with three modules:
 * **Target Deployment:** 1-Click deployable on Vercel.
 * **Dual AI Modes:**
   * **Default (Zero-Config):** Built-in high-speed deterministic rules engine + heuristic NLP. Requires **zero API keys** to test immediately.
-  * **Optional Live Gemini Mode:** Supply a Gemini API key via the top-right settings modal for live dynamic LLM extractions (supports Gemini 2.0 Flash and 1.5 Flash).
+  * **Optional Live Gemini Mode:** Supply a Gemini API key via the top-right settings modal for live dynamic LLM extractions (supports Gemini 3.8 Flash and 3.7 Flash).
 
 ---
 
