@@ -29,7 +29,7 @@ This prototype provides an operational copilot with three modules:
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/debojyoti/matchmaker-copilot.git
+git clone https://github.com/its-debojyoti-dey/matchmaker-copilot.git
 cd matchmaker-copilot
 
 # Install dependencies
@@ -73,4 +73,4 @@ Toggle between **Assessment Baseline** and **Post-Auditor Projected** to inspect
 ---
 
 ## Author
-* **Debojyoti Dey** — [GitHub](https://github.com/debojyoti) • [LinkedIn](https://linkedin.com/in/debojyoti-dey)
+* **Debojyoti Dey** — [GitHub](https://github.com/its-debojyoti-dey) • [LinkedIn](https://linkedin.com/in/debojyoti-dey)
