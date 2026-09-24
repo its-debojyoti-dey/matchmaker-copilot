@@ -16,48 +16,58 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing or invalid feedbackText" }, { status: 400 });
     }
 
-    // If an external API key is provided for Gemini or OpenAI, attempt live call
+    // Live LLM Mode: Uses latest Gemini 2.0 Flash (with 1.5 Flash fallback)
     if (apiKey && provider === "gemini") {
-      try {
-        const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              contents: [
-                {
-                  parts: [
-                    {
-                      text: `Analyze this matrimonial client rejection email and return a JSON object with:
-                      - category: one of ["DEAL_BREAKER_MISSED", "REVEALED_PREFERENCE", "LIFESTYLE_MISMATCH", "AESTHETIC_VIBE"]
-                      - categoryLabel: string
-                      - isOperationalError: boolean (true if matchmaker sent someone violating a stated dealbreaker)
-                      - confidence: number (0.0 to 1.0)
-                      - extractedReason: string
-                      - clientStatedPreferenceVsReality: string
-                      - recommendedAction: string
-                      - impactOnClientProfile: string
+      const models = ["gemini-2.0-flash", "gemini-1.5-flash"];
+      for (const model of models) {
+        try {
+          const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    role: "user",
+                    parts: [
+                      {
+                        text: `You are an expert product engineer at The Date Crew, a curated matrimonial platform. Analyze this client rejection email and return a valid JSON object.
 
-                      Email text: "${feedbackText}"`,
-                    },
-                  ],
+Client Rejection Email: "${feedbackText}"
+
+Extract:
+- category: one of ["DEAL_BREAKER_MISSED", "REVEALED_PREFERENCE", "LIFESTYLE_MISMATCH", "AESTHETIC_VIBE"]
+- categoryLabel: descriptive title
+- isOperationalError: boolean (true if matchmaker dispatched someone violating a stated dealbreaker)
+- confidence: number (0.0 to 1.0)
+- extractedReason: 1-2 sentence core reason
+- clientStatedPreferenceVsReality: what client requested vs what was sent
+- recommendedAction: clear guidance for the matchmaker
+- impactOnClientProfile: automated tag or update to client record`,
+                      },
+                    ],
+                  },
+                ],
+                generationConfig: {
+                  responseMimeType: "application/json",
+                  temperature: 0.1,
                 },
-              ],
-              generationConfig: {
-                responseMimeType: "application/json",
-              },
-            }),
-          }
-        );
+              }),
+            }
+          );
 
-        if (response.ok) {
-          const data = await response.json();
-          const parsed = JSON.parse(data.candidates[0].content.parts[0].text);
-          return NextResponse.json({ ...parsed, provider: "gemini-live" });
+          if (response.ok) {
+            const data = await response.json();
+            const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (textResponse) {
+              const parsed = JSON.parse(textResponse);
+              return NextResponse.json({ ...parsed, provider: `${model}-live` });
+            }
+          }
+        } catch {
+          // Attempt next model or fall back to local heuristic
         }
-      } catch {
-        // Fallback to local deterministic analyzer
       }
     }
 

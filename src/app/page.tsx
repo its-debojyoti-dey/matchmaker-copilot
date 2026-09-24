@@ -50,7 +50,7 @@ export default function Home() {
             </button>
 
             <a
-              href="https://github.com/debojyoti/date-crew-matchmaker-copilot"
+              href="https://github.com/debojyoti/matchmaker-copilot"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg shadow-sm transition"

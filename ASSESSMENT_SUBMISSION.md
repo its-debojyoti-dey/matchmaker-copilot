@@ -1,7 +1,7 @@
 # The Date Crew: Product Engineer Assessment
 **Candidate:** Debojyoti Dey  
 **Role:** Product Engineer  
-**Target Repository:** [github.com/debojyoti/date-crew-matchmaker-copilot](https://github.com/debojyoti/date-crew-matchmaker-copilot)  
+**Target Repository:** [github.com/debojyoti/matchmaker-copilot](https://github.com/debojyoti/matchmaker-copilot)  
 
 ---
 

@@ -1,4 +1,4 @@
-# The Date Crew — Matchmaker Copilot (Prototype)
+# Matchmaker Copilot (The Date Crew)
 
 A high-leverage product engineering prototype built for **The Date Crew** hiring assessment.
 
@@ -16,7 +16,7 @@ This prototype provides an operational copilot with three modules:
 * **Target Deployment:** 1-Click deployable on Vercel.
 * **Dual AI Modes:**
   * **Default (Zero-Config):** Built-in high-speed deterministic rules engine + heuristic NLP. Requires **zero API keys** to test immediately.
-  * **Optional Live Gemini Mode:** Supply a Gemini API key via the top-right settings modal for live dynamic LLM extractions.
+  * **Optional Live Gemini Mode:** Supply a Gemini API key via the top-right settings modal for live dynamic LLM extractions (supports Gemini 2.0 Flash and 1.5 Flash).
 
 ---
 
@@ -29,8 +29,8 @@ This prototype provides an operational copilot with three modules:
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/debojyoti/date-crew-matchmaker-copilot.git
-cd date-crew-matchmaker-copilot
+git clone https://github.com/debojyoti/matchmaker-copilot.git
+cd matchmaker-copilot
 
 # Install dependencies
 npm install

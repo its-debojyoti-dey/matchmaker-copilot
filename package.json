@@ -1,7 +1,8 @@
 {
-  "name": "date-crew-matchmaker-copilot",
+  "name": "matchmaker-copilot",
   "version": "1.0.0",
   "private": true,
+  "description": "Pre-Flight Match Auditor and Rejection Feedback Intelligence Prototype for The Date Crew",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +11,7 @@
   },
   "dependencies": {
     "lucide-react": "^0.453.0",
-    "next": "^14.2.15",
+    "next": "^14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
